@@ -1,4 +1,4 @@
-# --- Clean Up Task
+---
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
@@ -34,7 +34,7 @@ spec:
           rm -rf "${WORKSPACE_SOURCE_PATH}"/..?*
         fi
 
-# --- Nose Tests Task
+---
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
