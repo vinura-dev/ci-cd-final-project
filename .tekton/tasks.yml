@@ -35,21 +35,25 @@ spec:
         fi
 
 # --- Nose Tests Task
-apiVersion: {placeholder}
-kind: {placeholder}
+apiVersion: tekton.dev/v1beta1
+kind: Task
 metadata:
-  name: {placeholder}
+  name: nose
 spec:
   workspaces:
-    - name: {placeholder}
+    - name: source
   params:
-    - name: {placeholder}
-      description: {placeholder}
-      type: {placeholder}
-      default: {placeholder}
+    - name: args
+      description: Arguments to pass to nose
+      type: string
+      default: "-v"
   steps:
-    - name: {placeholder}
-      image: {placeholder}
-      workingDir: {placeholder}
+    - name: nosetests
+      image: python:3.9-slim
+      workingDir: $(workspaces.source.path)
       script: |
-        {placeholder}
+        #!/bin/bash
+        set -e
+        python -m pip install --upgrade pip wheel
+        pip install -r requirements.txt
+        nosetests $(params.args)
